@@ -1,0 +1,18 @@
+.container {
+    width: 20vw;
+    min-height: 100vh;
+    height: auto;
+    background-color: var(--primary);
+    color: var(--gray-light);
+}
+
+.logo {
+    width: 20vw;
+    height: 90px;
+    cursor: pointer;
+}
+
+button {
+    margin-top: 5px;
+    background: #04a2e1 !important;
+}

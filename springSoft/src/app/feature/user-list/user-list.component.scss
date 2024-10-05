@@ -1,0 +1,55 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    background:#e6eaee;
+    padding: 20px 40px;
+    box-sizing: border-box; 
+    min-height: 100vh;
+    height: auto !important;
+    overflow: auto;
+}
+
+.user-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.custom-header-row {
+    background-color: #ffffff; 
+    border-radius: 10px; 
+    overflow: hidden; 
+}
+
+:host::ng-deep .mat-mdc-header-row {
+    cursor: pointer;
+    background: #ffffff;
+}
+
+tr {
+    background: #ffffff;
+    color: #fff;
+    height: 55px;
+}
+
+:host::ng-deep .mat-mdc-row:hover {
+    opacity: 0.9;
+    cursor: pointer;
+} 
+
+td, th {
+    font-size: 16px;
+    font-family: 'Kanit', sans-serif;
+    color: #04a2e1;
+}
+
+mat-paginator {
+    min-width: 835.5px;
+}
+
+.user-image {
+    width: 40px;
+    height: auto;
+    border-radius: 50%;
+}

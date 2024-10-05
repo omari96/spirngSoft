@@ -1,0 +1,12 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "firstName": "გიორგი",
+      "lastName": "კვარაცხელია",
+      "email": "giorgi.kvaracxelia@gmail.com",
+      "phone": "599123456",
+      "img": ""
+    }
+  ]
+}

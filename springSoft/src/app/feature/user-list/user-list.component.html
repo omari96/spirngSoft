@@ -1,0 +1,64 @@
+<div class="container mat-elevation-z8">
+  @if (store.loading()) {
+    <div class="overlay-spinner">
+      <mat-spinner></mat-spinner>
+    </div>
+  }  
+    <div >
+      <table mat-table [dataSource]="store.users()" class="example-table"
+            matSort matSortActive="created" matSortDisableClear matSortDirection="desc">
+        <ng-container matColumnDef="img">
+          <th mat-header-cell *matHeaderCellDef>Image</th>
+          <td mat-cell *matCellDef="let row">
+            @if(row.img) {
+              <img class="user-image" alt="User Image">
+            } @else {
+              <img class="user-image" [src]="defaultImgUrl"  alt="Default Image">
+            }
+          </td>
+
+        </ng-container>
+        <ng-container matColumnDef="firstName">
+          <th  mat-header-cell *matHeaderCellDef>First Name</th>
+          <td mat-cell *matCellDef="let row">{{  row.firstName  }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="lastName">
+          <th  mat-header-cell *matHeaderCellDef>Last Name</th>
+          <td mat-cell *matCellDef="let row">{{  row.lastName  }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="email">
+          <th  mat-header-cell *matHeaderCellDef>email</th>
+          <td mat-cell *matCellDef="let row">{{ row.email }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="phone">
+          <th mat-header-cell *matHeaderCellDef>Phone</th>
+          <td mat-cell *matCellDef="let row">{{ row.phone }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="delete">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let row">
+            <mat-icon  class="icon-remove">
+              delete icon
+            </mat-icon>
+
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef=" displayedColumns" class="custom-header-row"></tr>
+        <tr (click)="openUser(row.id)" mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </div>
+
+    <mat-paginator
+                (page)="handlePageEvent($event)"
+                [length]="store.userQuantity()"
+                [pageSize]="store.pagination().pageSize"
+                [pageSizeOptions]="[5, 10, 20]"
+                [pageIndex]="store.pagination().pageIndex"
+                aria-label="Select page">
+    </mat-paginator>
+</div>

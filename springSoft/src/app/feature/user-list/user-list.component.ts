@@ -40,8 +40,8 @@ export class UserListComponent implements OnInit {
  
 
   onRemoveUser(id: string, event: Event) {
-    // event.stopImmediatePropagation();
-    // this.store.removeUser(id);
+    event.stopImmediatePropagation();
+    this.store.removeUser(id);
   }
 
   openUser(userId: string) {

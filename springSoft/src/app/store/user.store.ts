@@ -40,7 +40,6 @@ export const UserStore = signalStore(
           return http.get<User[]>(url, { observe: 'response' });
         }),
         tap((response: HttpResponse<User[]>) => {
-          console.log(store,'store')
           patchState(store, {
             users: response.body!,
             userQuantity: Number(response.headers.get('X-Total-Count')),
@@ -60,6 +59,59 @@ export const UserStore = signalStore(
         tap((response: User) => {
           patchState(store, { currentUser: response });
         })
+      )
+    ),
+
+    updateUser: rxMethod<Partial<User>>(
+      pipe(
+        switchMap((user: Partial<User>) =>
+          http.patch<User>(
+            `${url.baseUrl_api}/${ApiEnum.USERS}/${
+              store.currentUser().id
+            }`,
+            user
+          )
+        ),
+        tap((response: User) => {
+          patchState(store, { currentUser: response as User });
+        }),
+        Utils.setAndClearSuccessMessage(`User  successfully Updated`, store)
+      )
+    ),
+
+    addUser: rxMethod<Partial<User>>(
+      pipe(
+        switchMap((user: Partial<User>) =>
+          http.post<User>(`${url.baseUrl_api}/${ApiEnum.USERS}`, user)
+        ),
+        Utils.setAndClearSuccessMessage(`User  successfully Added`, store)
+      )
+    ),
+
+    removeCurrentUser: () => {
+      patchState(store, { currentUser: {} as User, error: undefined });
+    },
+
+    removeUser: rxMethod<string>(
+      pipe(
+        switchMap((userId: string) =>
+          http
+            .delete<void>(
+              `${url.baseUrl_api}/${ApiEnum.USERS}/${userId}`
+            )
+            .pipe(map((result) => ({ userId, result })))
+        ),
+
+        tap(({ userId }) => {
+          const updatedUsers = store
+            .users()
+            .filter((user) => user.id !== userId);
+          patchState(store, {
+            users: updatedUsers,
+            userQuantity: store.userQuantity() && store.userQuantity()! - 1,
+          });
+        }),
+        Utils.setAndClearSuccessMessage('User successfully removed', store)
       )
     ),
 

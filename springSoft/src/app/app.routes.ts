@@ -8,8 +8,16 @@ export const routes: Routes = [
         pathMatch: 'full',
     },
     {
+        path: `${AppUrlEnum.USER}/${AppUrlEnum.ADD}`,
+        loadComponent: () => import('./feature/user/user.component').then(m => m.UserComponent),
+    },
+    {
         path: `${AppUrlEnum.USER}/${AppUrlEnum.LIST}`,
         loadComponent: () => import('./feature/user-list/user-list.component').then(m => m.UserListComponent),
+    },
+    {
+        path: `${AppUrlEnum.USER}/:id`,
+        loadComponent: () => import('./feature/user/user.component').then(m => m.UserComponent),
     },
    
     { path: '**', pathMatch: 'full', redirectTo: `/${AppUrlEnum.USER}/${AppUrlEnum.LIST}` },

@@ -41,7 +41,7 @@
         <ng-container matColumnDef="delete">
           <th mat-header-cell *matHeaderCellDef></th>
           <td mat-cell *matCellDef="let row">
-            <mat-icon  class="icon-remove">
+            <mat-icon (click)="onRemoveUser(row.id, $event)"  class="icon-remove">
               delete icon
             </mat-icon>
 

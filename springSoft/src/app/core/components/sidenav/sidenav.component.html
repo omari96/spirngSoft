@@ -1,10 +1,18 @@
 <div class="container">
-    <div class="flex flex-center">
-        <button 
-            mat-flat-button 
-            color="primary" 
-            >
-            Add New User
-        </button>
-    </div>    
+  <div class="flex flex-center" style="padding-left: 10px;">
+    <button
+      mat-flat-button
+      color="primary"
+      (click)="router.navigate([AppUrlEnum.USER + '/' + AppUrlEnum.LIST])"
+    >
+      home page
+    </button>
+    <button
+      mat-flat-button
+      color="primary"
+      (click)="router.navigate([AppUrlEnum.USER + '/' + AppUrlEnum.ADD])"
+    >
+      Add New User
+    </button>
+  </div>
 </div>

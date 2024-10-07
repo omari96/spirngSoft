@@ -1,0 +1,67 @@
+<div class="container">
+    <div class="left full-height">
+        <div class="flex flex-center">
+            @if(userForm.get('img')?.value) {
+                <img class="uploaded-img" [src]="userForm.get('img')?.value" alt="Uploaded Image">
+            } @else {
+                <img class="uploaded-img" [src]="defaultImgUrl" alt="Placeholder Image">
+            }
+        </div>
+    </div>
+    <div class="right full-height">
+        <div class="right-header">
+            <h1>User Information</h1>
+        </div>
+      
+        <form [formGroup]="userForm" (ngSubmit)="onSubmit(userForm.value)">
+            <div class="inputs-container">
+                <!-- First Name -->
+                <mat-form-field appearance="fill">
+                    <mat-label>First Name</mat-label>
+                    <input matInput id="firstName" formControlName="firstName" placeholder="Enter first name" />
+                    <mat-error *ngIf="userForm.get('firstName')?.invalid && userForm.get('firstName')?.touched">
+                            <div>First Name is required.</div>
+                    </mat-error>
+                </mat-form-field>
+        
+                <!-- Last Name -->
+                <mat-form-field appearance="fill">
+                    <mat-label>Last Name</mat-label>
+                    <input matInput id="lastName" formControlName="lastName" placeholder="Enter last name" />
+                    <mat-error *ngIf="userForm.get('lastName')?.invalid && userForm.get('lastName')?.touched">
+                            <div>Last Name is required.</div>
+                    </mat-error>
+                </mat-form-field>
+                
+                <!-- Phone -->
+                <mat-form-field appearance="fill">
+                    <mat-label>Phone</mat-label>
+                    <input matInput  type="number" id="phone" formControlName="phone" placeholder="Enter phone number" />
+                </mat-form-field>
+
+                 <!-- email -->
+                 <mat-form-field appearance="fill">
+                    <mat-label>email</mat-label>
+                    <input matInput  type="text" id="email" formControlName="email" placeholder="Enter email" />
+                    <mat-error *ngIf="userForm.get('email')?.invalid && userForm.get('email')?.touched">
+                            <div>Email must be a valid email address</div>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+            @if(showFooterButtons) {
+                <div class="footer-button-container">
+                    <button mat-raised-button style="background: #04a2e1; color: #ffffff;" type="submit" [disabled]="userForm.invalid">Submit</button>
+                    @if (cancelButtonShow) {
+                    <button mat-raised-button color="warn" (click)="cancelModification()">Cancel Modification</button>
+                    }
+                </div> 
+            }  @else {
+                <button mat-raised-button (click)="modifyUser()">Modify User</button>
+            }
+        </form>
+        
+    </div>
+</div>
+
+  

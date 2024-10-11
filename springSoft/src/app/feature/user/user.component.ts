@@ -62,6 +62,25 @@ export class UserComponent {
     this.retrieveRouteParams();
   }
 
+  deleteImage() {
+    this.userForm.get('img')?.patchValue(null);
+  }
+  
+  imageInputChange(event: Event) {
+    const fileList: FileList = (event.target as HTMLInputElement).files!;
+    if (fileList.length > 0) {
+      const file: File = fileList[0];
+
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        this.userForm.patchValue({
+          img: e.target?.result,
+        });
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
   onSubmit(value: Partial<User>) {
     if (Object.keys(this.store.currentUser()).length) {
       this.store.updateUser(value);

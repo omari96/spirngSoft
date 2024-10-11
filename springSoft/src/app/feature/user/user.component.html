@@ -6,6 +6,14 @@
             } @else {
                 <img class="uploaded-img" [src]="defaultImgUrl" alt="Placeholder Image">
             }
+            @if(showFooterButtons) {
+                <input #imageInput hidden="true" type="file" onclick="this.value=null" (change)="imageInputChange($event)" accept="image/*"/>
+                <button class="upload-button" mat-flat-button  (click)="imageInput.click()">Upload Image</button>
+    
+                @if(userForm.get('img')?.value) {
+                    <button mat-raised-button color="warn" (click)="deleteImage()">Delete Image</button>
+                }
+            }
         </div>
     </div>
     <div class="right full-height">
